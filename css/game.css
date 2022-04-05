@@ -56,6 +56,41 @@
 
 .screen-game .cell.cell-x {
   background-image: url("/img/sprites.png");
-  background-position: calc(256px - 0*32px) calc(384px - 0*32px);
+  /* background-position: calc(256px - 0*32px) calc(384px - 0*32px); */
   background-color: yellow;
+  animation: playerIdle 1.2s infinite step-end;
+}
+
+@keyframes playerIdle {
+  0% {
+    background-position: calc(256px - 0*32px) calc(384px - 1*32px);
+  }
+
+  12% {
+    background-position: calc(256px - 1*32px) calc(384px - 1*32px);
+  } 
+
+  24% {
+    background-position: calc(256px - 2*32px) calc(384px - 1*32px);
+  }
+
+  36% {
+    background-position: calc(256px - 3*32px) calc(384px - 1*32px);
+  } 
+
+  48% {
+    background-position: calc(256px - 4*32px) calc(384px - 1*32px);
+  }
+
+  60% {
+    background-position: calc(256px - 5*32px) calc(384px - 1*32px);
+  } 
+
+  72% {
+    background-position: calc(256px - 6*32px) calc(384px - 1*32px);
+  }
+
+  84% {
+    background-position: calc(256px - 7*32px) calc(384px - 1*32px);
+  }
 }
