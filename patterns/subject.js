@@ -1,6 +1,6 @@
 
 
-export class Sujet {
+export class Subject {
 
   #observateurs;
 
@@ -8,13 +8,13 @@ export class Sujet {
     this.#observateurs = [];
   }
 
-  ajouterObservateur(observateur) {
+  addObserver(observateur) {
     this.#observateurs.push(observateur);
   }
 
-  notifier() {
+  notify() {
     for (let observateur of this.#observateurs) {
-      observateur.mettreAJour();
+      observateur.update();
     }
   }
 
