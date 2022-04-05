@@ -37,7 +37,7 @@ export class Application {
   }
 
   async loadTemplate(screen) {
-    document.querySelector("game").innerHTML = "Loading...";
+    document.querySelector("game").innerHTML = `<div class="loading">Loading...</div>`;
     const template = await fetch(`/templates/${screen}.html`);
     const templateHTML = await template.text();
     document.querySelector("game").innerHTML = templateHTML;

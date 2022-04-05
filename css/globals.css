@@ -11,6 +11,8 @@ body {
   display: flex;
   align-items: stretch;
   justify-content: center;
+  --color-purple-light: #7c70da;
+  --color-purple-dark: #3e31a2;
 }
 
 game {
@@ -19,4 +21,38 @@ game {
   flex-direction: column;
   justify-content: stretch;
   align-items: center;
+}
+
+@font-face {
+  font-family: "Boulder Dash";
+  src: url("/font/boulderdash.woff") format("woff");
+}
+
+button {
+  font-family: "Boulder Dash";
+  font-size: 1.2em;
+  padding: 0.7em 1em 0.5em 1em;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  border: 5px solid #fff;
+  margin: 5px;
+  border-radius: 10px;
+  outline: none;
+}
+button:hover, button.selected {
+  border-color: var(--color-purple-light);
+  color: var(--color-purple-light);
+}
+
+.loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Boulder Dash";
+  font-size: 1.2em;
 }

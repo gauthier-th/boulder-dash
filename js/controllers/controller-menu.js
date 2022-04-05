@@ -9,8 +9,11 @@ export class ControllerMenu extends Subject {
     this.#application = application;
   }
 
-  clickNewGame() {
-    this.#application.changeScreen("game");
+  buttonClick(button) {
+    if (button === "new-game")
+      this.#application.changeScreen("game");
+    else if (button === "level-settings")
+      this.#application.changeScreen("level-settings");
   }
 
   resumeGame() {

@@ -6,3 +6,9 @@
   justify-content: center;
   align-items: center;
 }
+
+.screen-menu .buttons {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+}
