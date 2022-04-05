@@ -1,13 +1,13 @@
-import { Echiquier } from "./../modeles/echiquier.js";
-import { Sujet } from "./../../patterns/sujet.js";
+import { BoulderDash } from "../models/model-boulder-dash.js";
+import { Sujet } from "../../patterns/sujet.js";
 
-export class ControleurBoulderDash extends Sujet {
+export class ControllerBoulderDash extends Sujet {
 
   #boulderDash;
 
   constructor() {
     super();
-    this.#boulderDash = new Echiquier();
+    this.#boulderDash = new BoulderDash();
     this.nouvellePartie();
   }
 

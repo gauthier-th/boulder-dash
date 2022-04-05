@@ -1,15 +1,15 @@
-import { ControleurBoulderDash } from "./../controleurs/controleurs-boulder-dash.js";
+import { ControllerBoulderDash } from "../controllers/controller-boulder-dash.js";
 import { VueBoulderDash } from "./../vue/vue-boulder-dash.js";
 
 export class Application {
 
-  #controleurBoulderDash;
+  #controllerBoulderDash;
   #vueBoulderDash;
 
   constructor() {
     console.log("Application en route");
-    this.#controleurBoulderDash = new ControleurBoulderDash();
-    this.#vueBoulderDash = new VueBoulderDash(this.#controleurBoulderDash);
+    this.#controllerBoulderDash = new ControllerBoulderDash();
+    this.#vueBoulderDash = new VueBoulderDash(this.#controllerBoulderDash);
   }
 
 }

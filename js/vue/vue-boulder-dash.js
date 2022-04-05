@@ -2,22 +2,22 @@ import { Observateur } from "./../../patterns/observateur.js";
 
 export class VueBoulderDash extends Observateur {
 
-  #controleurBoulderDash;
+  #controllerBoulderDash;
 
-  constructor(controleurBoulderDash) {
+  constructor(controllerBoulderDash) {
     super();
-    this.#controleurBoulderDash = controleurBoulderDash;
-    this.#controleurBoulderDash.ajouterObservateur(this);
+    this.#controllerBoulderDash = controllerBoulderDash;
+    this.#controllerBoulderDash.ajouterObservateur(this);
     this.afficherBoulderDash();
     document.querySelector("button").addEventListener("click", () => {
-      this.#controleurBoulderDash.nouvellePartie();
+      this.#controllerBoulderDash.nouvellePartie();
     });
   }
 
   afficherBoulderDash() {
-    const grille = this.#controleurBoulderDash.boulderDash.grille;
+    const grille = this.#controllerBoulderDash.boulderDash.grille;
     console.log(grille);
-    console.log(this.#controleurBoulderDash.boulderDash.deplacementsPossibles);
+    console.log(this.#controllerBoulderDash.boulderDash.deplacementsPossibles);
     let innerHTML = "";
     for (let i = 0; i < grille.length; i++) {
       innerHTML += "<div class='ligne'>";
@@ -34,18 +34,18 @@ export class VueBoulderDash extends Observateur {
         console.log(x, y, token.hasAttribute("pion"));
         if (token.hasAttribute("pion")) {
           console.log("sélectionnerpièce")
-          this.#controleurBoulderDash.selectionnerPiece(x, y);
+          this.#controllerBoulderDash.selectionnerPiece(x, y);
         }
         else {
-          console.log(this.#controleurBoulderDash.boulderDash.deplacementsPossibles);
-          this.#controleurBoulderDash.deplacerPiece(x, y);
+          console.log(this.#controllerBoulderDash.boulderDash.deplacementsPossibles);
+          this.#controllerBoulderDash.deplacerPiece(x, y);
         }
       });
     }
   }
 
   afficherJoueur() {
-    document.getElementById("joueur").innerText = this.#controleurBoulderDash.boulderDash.joueurCourant;
+    document.getElementById("joueur").innerText = this.#controllerBoulderDash.boulderDash.joueurCourant;
   }
 
   mettreAJour() {
