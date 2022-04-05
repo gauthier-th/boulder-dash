@@ -11,10 +11,13 @@ export class Level {
   #cells; // cells[16][32]
   #startPoint;
   #playerCell;
+  #gravityNeedChecking = true;
+  #controller;
 
-  constructor() {
+  constructor(controller) {
     this.#cells = new Array(16).fill(null).map(() => new Array(32).fill(null));
     this.#playerCell = new PlayerCell();
+    this.#controller = controller;
   }
 
   loadLevelFromText(cellsText) {
@@ -85,6 +88,45 @@ export class Level {
 
       cell.onDestroy();
     }
+  }
+
+  get gravityNeedChecking(){
+    return this.#gravityNeedChecking;
+  }
+
+  set gravityNeedChecking(value){
+    this.#gravityNeedChecking = value;
+  }
+
+  getLowerCell(cell){
+    return this.#cells[cell.x+1][cell.y];
+  }
+
+  checkGravity(){
+    if(!this.gravityNeedChecking)
+      return
+
+    this.gravityNeedChecking = false;
+
+    for (let x = this.#cells.length-1; x >= 0; x--) {
+      const yS = this.#cells[x];
+      for (let y = yS.length-1; y >= 0; y--) {
+        let cell = this.#cells[x][y];
+        if (cell.getLetter()=="R") {
+          if (this.getLowerCell(cell).getLetter()=="V") {
+            this.#cells[x+1][y] = cell;
+            cell.setPosition(x+1, y);
+
+            this.#cells[x][y] = new VoidCell();
+            this.#cells[x][y].setPosition(x, y);
+
+            this.gravityNeedChecking = true;
+          }
+        }
+      }
+    }
+
+    this.#controller.notify();
   }
 
 }

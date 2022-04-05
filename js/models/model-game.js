@@ -3,9 +3,11 @@
 export class Game { 
 
   #currentLevel;
+  #gravityInterval;
 
   constructor(controller) {
-   this.#currentLevel = controller.getLevel(0);
+    this.#currentLevel = controller.getLevel(0);
+    this.#gravityInterval = setInterval(()=>this.#currentLevel.checkGravity(), 200);
   }
 
   get currentLevel() {

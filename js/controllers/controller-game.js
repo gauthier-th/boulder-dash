@@ -12,8 +12,6 @@ export class ControllerGame extends Subject {
     this.#application = application;
     this.#game = new Game(this);
     this.newGame();
-
-    //
   }
 
   get game() {
@@ -26,7 +24,7 @@ export class ControllerGame extends Subject {
   }
 
   getLevel(levelNumber) {
-    const level = new Level();
+    const level = new Level(this);
     level.loadLevelFromText(this.#application.levels[levelNumber]);
     return level;
   }
@@ -34,6 +32,7 @@ export class ControllerGame extends Subject {
   movePlayerRelative(dX, dY){
     this.#game.movePlayerRelative(dX, dY);
     this.notify();
+    this.#game.currentLevel.gravityNeedChecking = true;
   }
   
 }
