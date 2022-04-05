@@ -37,7 +37,7 @@
 
 .screen-game .cell.cell-r { /* rock */
   background-image: url("/img/sprites.png");
-  background-position: calc(256px - 3*32px) calc(384px - 6*32px);
+  background-position: calc(256px - 0*32px) calc(384px - 7*32px);
   background-color: darkgray;
 }
 

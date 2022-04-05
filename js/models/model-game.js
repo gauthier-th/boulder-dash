@@ -5,7 +5,7 @@ export class Game {
   #currentLevel;
 
   constructor(controller) {
-   this.#currentLevel = controller.getLevel(1);
+   this.#currentLevel = controller.getLevel(0);
   }
 
   get currentLevel() {
