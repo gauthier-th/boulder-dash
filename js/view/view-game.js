@@ -8,49 +8,34 @@ export class ViewGame extends Observer {
     super();
     this.#controllerGame = controllerGame;
     this.#controllerGame.addObserver(this);
-    this.showBoulderDash();
-    document.querySelector("button").addEventListener("click", () => {
-      this.#controllerGame.newGame();
+    this.showLevel();
+    // document.querySelector("button").addEventListener("click", () => {
+    //   this.#controllerGame.newGame();
+    // });
+    let body = document.querySelector("body");
+    body.addEventListener('keydown', (e) => {
+      if (!e.repeat)
+        console.log(`first keydown event. key property value is "${e.key}"`);
+      else
+        console.log(`keydown event repeats. key property value is "${e.key}"`);
     });
   }
 
-  showBoulderDash() {
-    const grid = this.#controllerGame.game.grid;
-    console.log(grid);
-    console.log(this.#controllerGame.game.availableMoves);
-    let innerHTML = "";
-    for (let i = 0; i < grid.length; i++) {
-      innerHTML += "<div class='ligne'>";
-      for (let j = 0; j < grid[i].length; j++) {  
-        innerHTML += "<div class='case " + (grid[i][j]?.type || "") + " " + (grid[i][j]?.couleur || "") + "' " + (grid[i][j] ? "pion" : "") + " data-x='" + j + "' data-y='" + i + "'></div>";
+  showLevel() {
+    const grid = document.getElementById("level-grid");
+    grid.innerHTML = '';
+    for (let line of this.#controllerGame.game.currentLevel.cells) {
+      let ligneHTML = '<div class="line">';
+      for (let cell of line) {
+        ligneHTML += `<div class="cell cell-${cell.getLetter().toLowerCase()}"></div>`;
       }
-      innerHTML += "</div>";
+      ligneHTML += '</div>';
+      grid.innerHTML += ligneHTML;
     }
-    document.querySelector("boulderDash").innerHTML = innerHTML;
-    for (let token of document.querySelectorAll(".case")) {
-      token.addEventListener("click", () => {
-        const x = parseInt(token.getAttribute("data-x"), 10);
-        const y = parseInt(token.getAttribute("data-y"), 10);
-        console.log(x, y, token.hasAttribute("pion"));
-        if (token.hasAttribute("pion")) {
-          console.log("sélectionnerpièce")
-          this.#controllerGame.selectionnerPiece(x, y);
-        }
-        else {
-          console.log(this.#controllerGame.game.availableMoves);
-          this.#controllerGame.deplacerPiece(x, y);
-        }
-      });
-    }
-  }
-
-  showPlayer() {
-    document.getElementById("joueur").innerText = this.#controllerGame.game.joueurCourant;
   }
 
   update() {
-    this.showBoulderDash();
-    this.showPlayer();
+    this.showLevel();
   }
 
 }

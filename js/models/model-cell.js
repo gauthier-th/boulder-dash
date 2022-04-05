@@ -2,20 +2,28 @@
 
 export class Cell {
 
-    #x;
-    #y;
+  #x;
+  #y;
 
-    constructor() {
-      
-    }
+  constructor() {
     
-    getLetter() {
-      return "";
-    }
-
-    setPosition(x, y){
-        this.#x = x;
-        this.#y = y;
-    }
-  
   }
+  
+  getLetter() {
+    return "";
+  }
+
+  setPosition(x, y){
+    this.#x = x;
+    this.#y = y;
+  }
+
+  get x() {
+      return this.#x;
+  }
+
+  get y(){
+      return this.#y;
+  }
+
+}

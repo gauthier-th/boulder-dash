@@ -1,13 +1,13 @@
 import { Cell } from "../model-cell.js";
 
-export class StartPointCell extends Cell{
+export class PlayerCell extends Cell{
 
   constructor() {
     super();
   }
   
   getLetter() {
-    return "P";
+    return "PLAYER";
   }
 
 }

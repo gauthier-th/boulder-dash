@@ -1,9 +1,9 @@
 import { ControllerMenu } from "../controllers/controller-menu.js";
-import { ViewMenu } from "./../view/view-menu.js";
+import { ViewMenu } from "../view/view-menu.js";
 import { ControllerGame } from "../controllers/controller-game.js";
-import { ViewGame } from "./../view/view-game.js";
+import { ViewGame } from "../view/view-game.js";
 import { ControllerLevelSettings } from "../controllers/controller-level-settings.js";
-import { ViewLevelSettings } from "./../view/view-level-settings.js";
+import { ViewLevelSettings } from "../view/view-level-settings.js";
 
 export class Application {
 
@@ -56,6 +56,10 @@ export class Application {
     }
     else
       this.#levels = JSON.parse(lastLevels);
+  }
+
+  get levels() {
+    return this.#levels;
   }
 
 }

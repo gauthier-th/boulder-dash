@@ -1,5 +1,6 @@
 import { Game } from "../models/model-game.js";
 import { Subject } from "../../patterns/subject.js";
+import { Level } from "../models/model-level.js";
 
 export class ControllerGame extends Subject {
 
@@ -9,8 +10,10 @@ export class ControllerGame extends Subject {
   constructor(application) {
     super();
     this.#application = application;
-    this.#game = new Game();
+    this.#game = new Game(this);
     this.newGame();
+
+    //
   }
 
   get game() {
@@ -20,6 +23,12 @@ export class ControllerGame extends Subject {
   newGame() {
     this.#game.newGame();
     this.notify();
+  }
+
+  getLevel(levelNumber) {
+    const level = new Level();
+    level.loadLevelFromText(this.#application.levels[levelNumber]);
+    return level;
   }
 
 }
