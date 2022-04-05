@@ -4,6 +4,7 @@ export class VoidCell extends Cell{
 
   constructor() {
     super();
+    this.destroyable = true;
   }
   
   getLetter() {

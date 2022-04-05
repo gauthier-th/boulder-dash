@@ -31,4 +31,9 @@ export class ControllerGame extends Subject {
     return level;
   }
 
+  movePlayerRelative(dX, dY){
+    this.#game.movePlayerRelative(dX, dY);
+    this.notify();
+  }
+  
 }

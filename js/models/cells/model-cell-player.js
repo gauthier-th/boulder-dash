@@ -7,7 +7,7 @@ export class PlayerCell extends Cell{
   }
   
   getLetter() {
-    return "PLAYER";
+    return "X";
   }
 
 }

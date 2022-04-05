@@ -4,6 +4,7 @@ export class DiamondCell extends Cell{
 
   constructor() {
     super();
+    this.destroyable = true;
   }
   
   getLetter() {

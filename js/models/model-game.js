@@ -16,4 +16,7 @@ export class Game {
     this.#currentLevel.movePlayer(this.#currentLevel.startPoint.x, this.#currentLevel.startPoint.y);
   }
 
+  movePlayerRelative(dX, dY) {
+    this.#currentLevel.movePlayer(this.#currentLevel.playerCell.x+dX, this.#currentLevel.playerCell.y+dY);
+  }
 }

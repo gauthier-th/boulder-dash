@@ -4,6 +4,7 @@ export class Cell {
 
   #x;
   #y;
+  #destroyable = false;
 
   constructor() {
     
@@ -24,6 +25,18 @@ export class Cell {
 
   get y(){
       return this.#y;
+  }
+
+  get destroyable(){
+    return this.#destroyable;
+  }
+
+  set destroyable(value){
+    this.#destroyable = value;
+  }
+
+  onDestroy(){
+
   }
 
 }

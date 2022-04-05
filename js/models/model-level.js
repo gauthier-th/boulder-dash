@@ -64,10 +64,26 @@ export class Level {
     return this.#startPoint;
   }
 
+  get playerCell(){
+    return this.#playerCell;
+  }
+
   movePlayer(x, y) {
-    if (["V", "P"].includes(this.#cells[x][y].getLetter())){
+    let cell = this.#cells[x][y];
+    const letterCell = cell.getLetter();
+    if (["P"].includes(letterCell)){
       this.#playerCell.setPosition(x, y);
       this.#cells[x][y] = this.#playerCell;
+    }else if(cell.destroyable){
+      let oldX = this.#playerCell.x;
+      let oldY = this.#playerCell.y;
+      this.#cells[oldX][oldY] = new VoidCell();
+      this.#cells[oldX][oldY].setPosition(oldX, oldY);
+
+      this.#cells[x][y] = this.#playerCell;
+      this.#playerCell.setPosition(x, y);
+
+      cell.onDestroy();
     }
   }
 
