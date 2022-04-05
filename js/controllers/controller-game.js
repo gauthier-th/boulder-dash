@@ -3,10 +3,12 @@ import { Subject } from "../../patterns/subject.js";
 
 export class ControllerGame extends Subject {
 
+  #application;
   #game;
 
-  constructor() {
+  constructor(application) {
     super();
+    this.#application = application;
     this.#game = new Game();
     this.newGame();
   }

@@ -1,6 +1,6 @@
 import { Observer } from "../../patterns/observer.js";
 
-export class ViewMenu extends Observer {
+export class ViewLevelSettings extends Observer {
 
   #controllerMenu;
 
