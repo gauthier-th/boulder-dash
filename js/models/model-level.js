@@ -146,6 +146,10 @@ export class Level {
 
             this.#cells[x][y] = new VoidCell();
             this.#cells[x][y].setPosition(x, y);
+            
+            if(this.getLowerCell(cell).getLetter()=="X"){
+              this.killPlayer();
+            }
 
             this.gravityNeedChecking = true;
           }
@@ -177,5 +181,14 @@ export class Level {
     }
 
     this.#diamondCount = count;
+  }
+
+  killPlayer(){
+    let x = this.#playerCell.x;
+    let y = this.#playerCell.y;
+    this.#playerCell = null;
+    this.#cells[x][y] = new VoidCell();
+    this.#cells[x][y].setPosition(x, y);
+    setTimeout(()=>this.#controller.restartGame(), 3000);
   }
 }

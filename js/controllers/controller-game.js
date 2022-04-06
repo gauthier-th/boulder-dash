@@ -23,6 +23,11 @@ export class ControllerGame extends Subject {
     this.notify();
   }
 
+  restartGame(){
+    this.#game.restartGame();
+    this.notify();
+  }
+
   getLevel(levelNumber) {
     const level = new Level(this);
     level.loadLevelFromText(this.#application.levels[levelNumber]);

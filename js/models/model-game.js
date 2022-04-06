@@ -22,8 +22,12 @@ export class Game {
       clearInterval(this.#gravityInterval);
 
     this.#currentLevel = this.#controller.getLevel(levelIndex);
-    this.#gravityInterval = setInterval(()=>this.#currentLevel.checkGravity(), 200);
+    this.#gravityInterval = setInterval(()=>this.#currentLevel.checkGravity(), 220);
     this.#currentLevel.movePlayer(this.#currentLevel.startPoint.x, this.#currentLevel.startPoint.y);
+  }
+  
+  restartGame(){
+    this.newGame(this.#lastLevelIndex);
   }
 
   movePlayerRelative(dX, dY, direction) {
