@@ -29,8 +29,8 @@ export class ControllerGame extends Subject {
     return level;
   }
 
-  movePlayerRelative(dX, dY){
-    this.#game.movePlayerRelative(dX, dY);
+  movePlayerRelative(dX, dY, direction){
+    this.#game.movePlayerRelative(dX, dY, direction);
     this.notify();
     this.#game.currentLevel.gravityNeedChecking = true;
   }

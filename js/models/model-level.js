@@ -71,7 +71,7 @@ export class Level {
     return this.#playerCell;
   }
 
-  movePlayer(x, y) {
+  movePlayer(x, y, direction="") {
     let cell = this.#cells[x][y];
     const letterCell = cell.getLetter();
     if (["P"].includes(letterCell)){
@@ -87,6 +87,25 @@ export class Level {
       this.#playerCell.setPosition(x, y);
 
       cell.onDestroy();
+    }else if(letterCell=="R" && ["LEFT", "RIGHT"].includes(direction)){
+      let newX, newY;
+      if(direction == "LEFT"){
+        newX = x+0;
+        newY = y-1;
+      }else if(direction == "RIGHT"){
+        newX = x+0;
+        newY = y+1;
+      }
+      console.log(this.#cells[newX][newY]);
+      if(this.#cells[newX][newY].getLetter()=="V"){
+        cell.setPosition(newX, newY);
+        this.#cells[newX][newY] = cell;
+
+        this.#cells[x][y] = new VoidCell();
+        this.#cells[x][y].setPosition(x, y);
+
+        this.movePlayer(x, y, direction);
+      }
     }
   }
 

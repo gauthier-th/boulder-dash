@@ -20,13 +20,13 @@ export class ViewGame extends Observer {
       {
         this.#lastMoveTimestamp = Date.now();
         if(["z", "ArrowUp"].includes(e.key)){
-          this.#controllerGame.movePlayerRelative(-1, 0);
+          this.#controllerGame.movePlayerRelative(-1, 0, "UP");
         }else if(["q", "ArrowLeft"].includes(e.key)){
-          this.#controllerGame.movePlayerRelative(0, -1);
+          this.#controllerGame.movePlayerRelative(0, -1, "LEFT");
         }else if(["s", "ArrowDown"].includes(e.key)){
-          this.#controllerGame.movePlayerRelative(1, 0);
+          this.#controllerGame.movePlayerRelative(1, 0, "DOWN");
         }else if(["d", "ArrowRight"].includes(e.key)){
-          this.#controllerGame.movePlayerRelative(0, 1);
+          this.#controllerGame.movePlayerRelative(0, 1, "RIGHT");
         }
       }
     });
