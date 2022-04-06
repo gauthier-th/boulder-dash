@@ -14,22 +14,25 @@ export class ViewGame extends Observer {
     // document.querySelector("button").addEventListener("click", () => {
     //   this.#controllerGame.newGame();
     // });
-    let body = document.querySelector("body");
-    body.addEventListener('keydown', (e) => {
-      if (!e.repeat || (e.repeat && Date.now()-this.#lastMoveTimestamp > 100))
-      {
-        this.#lastMoveTimestamp = Date.now();
-        if(["z", "ArrowUp"].includes(e.key)){
-          this.#controllerGame.movePlayerRelative(-1, 0, "UP");
-        }else if(["q", "ArrowLeft"].includes(e.key)){
-          this.#controllerGame.movePlayerRelative(0, -1, "LEFT");
-        }else if(["s", "ArrowDown"].includes(e.key)){
-          this.#controllerGame.movePlayerRelative(1, 0, "DOWN");
-        }else if(["d", "ArrowRight"].includes(e.key)){
-          this.#controllerGame.movePlayerRelative(0, 1, "RIGHT");
-        }
+    
+    this.keyDown = this.keyDown.bind(this);
+    document.body.addEventListener('keydown', this.keyDown);
+  }
+
+  keyDown(e) {
+    if (!e.repeat || (e.repeat && Date.now()-this.#lastMoveTimestamp > 100))
+    {
+      this.#lastMoveTimestamp = Date.now();
+      if(["z", "ArrowUp"].includes(e.key)){
+        this.#controllerGame.movePlayerRelative(-1, 0, "UP");
+      }else if(["q", "ArrowLeft"].includes(e.key)){
+        this.#controllerGame.movePlayerRelative(0, -1, "LEFT");
+      }else if(["s", "ArrowDown"].includes(e.key)){
+        this.#controllerGame.movePlayerRelative(1, 0, "DOWN");
+      }else if(["d", "ArrowRight"].includes(e.key)){
+        this.#controllerGame.movePlayerRelative(0, 1, "RIGHT");
       }
-    });
+    }
   }
 
   showLevel() {
@@ -49,4 +52,7 @@ export class ViewGame extends Observer {
     this.showLevel();
   }
 
+  destroy() {
+    document.body.removeEventListener('keydown', this.keyDown);
+  }
 }

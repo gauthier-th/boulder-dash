@@ -20,6 +20,9 @@ export class Application {
   }
 
   async changeScreen(screen, settings = {}) {
+    if(this.#view != undefined)
+      this.#view.destroy();
+      
     this.#screen = screen;
     await this.loadTemplate(screen);
     if (this.#screen === "menu") {

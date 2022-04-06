@@ -10,4 +10,7 @@ export class Observer {
     throw "La méthode update doit être redéfinie."
   }
 
+  destroy () {
+    
+  }
 }

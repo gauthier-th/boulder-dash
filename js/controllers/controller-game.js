@@ -19,7 +19,7 @@ export class ControllerGame extends Subject {
   }
 
   newGame() {
-    this.#game.newGame();
+    this.#game.newGame(0);
     this.notify();
   }
 
@@ -33,6 +33,15 @@ export class ControllerGame extends Subject {
     this.#game.movePlayerRelative(dX, dY, direction);
     this.notify();
     this.#game.currentLevel.gravityNeedChecking = true;
+    this.#game.checkEndGame();
   }
-  
+
+  goBackMenu(){
+    this.#game.destroy();
+    this.#application.changeScreen("menu");
+  }  
+
+  get application(){
+    return this.#application;
+  }
 }
