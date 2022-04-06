@@ -13,6 +13,8 @@ export class Level {
   #playerCell;
   #gravityNeedChecking = true;
   #controller;
+  #diamondCountStart = 0;
+  #diamondCount = 0;
 
   constructor(controller) {
     this.#cells = new Array(16).fill(null).map(() => new Array(32).fill(null));
@@ -33,6 +35,7 @@ export class Level {
             break;
           case "D":
             cell = new DiamondCell();
+            this.#diamondCountStart++;
             break;
           case "T":
             cell = new EarthCell();
@@ -57,6 +60,8 @@ export class Level {
       y = 0;
       x++;
     }
+
+    this.#diamondCount = this.#diamondCountStart;
   }
 
   get cells() {
@@ -86,6 +91,9 @@ export class Level {
       this.#cells[x][y] = this.#playerCell;
       this.#playerCell.setPosition(x, y);
 
+      if(letterCell == "D")
+        this.refreshDiamondCount();
+
       cell.onDestroy();
     }else if(letterCell=="R" && ["LEFT", "RIGHT"].includes(direction)){
       let newX, newY;
@@ -96,7 +104,7 @@ export class Level {
         newX = x+0;
         newY = y+1;
       }
-      console.log(this.#cells[newX][newY]);
+      
       if(this.#cells[newX][newY].getLetter()=="V"){
         cell.setPosition(newX, newY);
         this.#cells[newX][newY] = cell;
@@ -148,4 +156,26 @@ export class Level {
     this.#controller.notify();
   }
 
+  get diamondCountStart(){
+    return this.#diamondCountStart;
+  }
+
+  get diamondCount(){
+    return this.#diamondCount;
+  }
+
+  refreshDiamondCount(){
+    let count = 0;
+    for (let x = this.#cells.length-1; x >= 0; x--) {
+      const yS = this.#cells[x];
+      for (let y = yS.length-1; y >= 0; y--) {
+        let cell = this.#cells[x][y];
+        if(cell.getLetter() == "D"){
+          count++;
+        }
+      }
+    }
+
+    this.#diamondCount = count;
+  }
 }
