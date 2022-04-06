@@ -62,6 +62,12 @@
   animation: playerIdle 1.2s infinite step-end;
 }
 
+.screen-game .cell.cell-e {
+  background-image: url("/img/sprites.png");
+  background-color: red;
+  animation: explodeAnimation 0.5s infinite step-end;
+}
+
 @keyframes playerIdle {
   0% {
     background-position: calc(256px - 0*32px) calc(384px - 1*32px);
@@ -113,5 +119,17 @@
   }
   84% {
     background-position: calc(256px - 7*32px) calc(384px - 10*32px);
+  }
+}
+
+@keyframes explodeAnimation {
+  0% {
+    background-position: calc(256px - 3*32px) calc(384px - 0*32px);
+  }
+  33% {
+    background-position: calc(256px - 2*32px) calc(384px - 0*32px);
+  } 
+  66% {
+    background-position: calc(256px - 1*32px) calc(384px - 0*32px);
   }
 }

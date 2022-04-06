@@ -5,6 +5,7 @@ import { RockCell } from "./cells/model-cell-rock.js";
 import { VoidCell } from "./cells/model-cell-void.js";
 import { StartPointCell } from "./cells/model-cell-startpoint.js";
 import { PlayerCell } from "./cells/model-cell-player.js";
+import { ExplodeCell } from "./cells/model-cell-explode.js";
 
 export class Level {
 
@@ -148,6 +149,7 @@ export class Level {
             this.#cells[x][y].setPosition(x, y);
             
             if(this.getLowerCell(cell).getLetter()=="X"){
+              this.explode(cell.x, cell.y);
               this.killPlayer();
             }
 
@@ -183,12 +185,27 @@ export class Level {
     this.#diamondCount = count;
   }
 
+  explode(x, y){
+    for (let dX = -1; dX <= 1; dX++) {
+      for (let dY = -1; dY <= 1; dY++) {
+        let cell = this.#cells[x+dX][y+dY];
+        if(cell.getLetter() != "M"){
+          this.#cells[x+dX][y+dY] = new ExplodeCell();
+          this.#cells[x+dX][y+dY].setPosition(x+dX, y+dY);
+          setTimeout(()=>{
+            this.#cells[x+dX][y+dY] = new VoidCell();
+            this.#cells[x+dX][y+dY].setPosition(x+dX, y+dY);
+            if(dX == 1 && dY == 1)
+              this.#controller.notify();
+              this.#gravityNeedChecking = true;
+          }, 400);
+        }
+      }
+    }
+  }
+
   killPlayer(){
-    let x = this.#playerCell.x;
-    let y = this.#playerCell.y;
     this.#playerCell = null;
-    this.#cells[x][y] = new VoidCell();
-    this.#cells[x][y].setPosition(x, y);
     setTimeout(()=>this.#controller.restartGame(), 3000);
   }
 }
