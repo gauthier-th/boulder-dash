@@ -1,4 +1,5 @@
 
+import { Level } from "./model-level.js";
 
 export class Game { 
 
@@ -30,6 +31,18 @@ export class Game {
     this.newGame(this.#lastLevelIndex);
   }
 
+  resumeState(state){
+    this.#lastLevelIndex = state.levelId;
+
+    if(this.#gravityInterval != -1)
+      clearInterval(this.#gravityInterval);
+
+    const level = new Level(this.#controller);
+    level.loadLevelFromText(state.levelText);
+    this.#currentLevel = level;
+    this.#gravityInterval = setInterval(()=>this.#currentLevel.checkGravity(), 220);
+  }
+
   movePlayerRelative(dX, dY, direction) {
     this.#currentLevel.movePlayer(this.#currentLevel.playerCell.x+dX, this.#currentLevel.playerCell.y+dY, direction);
   }
@@ -47,5 +60,9 @@ export class Game {
   destroy(){
     if(this.#gravityInterval != -1)
       clearInterval(this.#gravityInterval);
+  }
+
+  get lastLevelIndex(){
+    return this.#lastLevelIndex;
   }
 }

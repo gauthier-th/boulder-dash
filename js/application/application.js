@@ -30,7 +30,7 @@ export class Application {
       this.#view = new ViewMenu(this.#controller);
     }
     else if (this.#screen === "game") {
-      this.#controller = new ControllerGame(this);
+      this.#controller = new ControllerGame(this, settings);
       this.#view = new ViewGame(this.#controller);
     }
     else if (this.#screen === "level-settings") {

@@ -51,6 +51,9 @@ export class Level {
             cell = new StartPointCell();
             this.#startPoint = cell;
             break;
+          case "X":
+            cell = this.#playerCell;
+            break;
         }
         if (cell !== null) {
           cell.setPosition(x, y)
@@ -63,6 +66,19 @@ export class Level {
     }
 
     this.#diamondCount = this.#diamondCountStart;
+  }
+
+  levelToText(){
+    let text = "";
+    for (let i = 0; i < this.#cells.length; i++) {
+      const line = this.#cells[i];
+      for (let j = 0; j < line.length; j++) {
+        const cell = this.#cells[i][j];
+        text += cell.getLetter();
+      }
+      text+="\n"
+    }
+    return text;
   }
 
   get cells() {
