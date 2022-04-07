@@ -7,7 +7,67 @@
   align-items: center;
 }
 
+.screen-level-settings #levels {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .screen-level-settings .title {
   font-family: "Boulder Dash";
   font-size: 1.2em;
+}
+
+.screen-level-settings .level-grid{
+  border: white 3px solid;
+  margin: 10px;
+}
+
+.screen-level-settings .line {
+  display: flex;
+}
+.screen-level-settings .cell {
+  background-color: black;
+  width: 16px;
+  height: 16px;
+}
+
+.screen-level-settings .cell.cell-m { /* wall */
+  background-image: url("/img/sprites.png");
+  background-position: calc(128px - 1*16px) calc(192px - 6*16px);
+  background-color: grey;
+  background-size: 128px 192px;
+}
+
+.screen-level-settings .cell.cell-d { /* diamond */
+  background-image: url("/img/sprites.png");
+  background-position: calc(128px - 0*16px) calc(192px - 10*16px);
+  background-color: cyan;
+  background-size: 128px 192px;
+}
+
+.screen-level-settings .cell.cell-t { /* earth */
+  background-image: url("/img/sprites.png");
+  background-position: calc(128px - 1*16px) calc(192px - 7*16px);
+  background-color: saddlebrown;
+  background-size: 128px 192px;
+}
+
+.screen-level-settings .cell.cell-r { /* rock */
+  background-image: url("/img/sprites.png");
+  background-position: calc(128px - 0*16px) calc(192px - 7*16px);
+  background-color: darkgray;
+  background-size: 128px 192px;
+}
+
+.screen-level-settings .cell.cell-v { /* void */
+  background-color: black;
+}
+
+.screen-level-settings .cell.cell-p { /* startpoint */
+  background-color: yellow;
+  background-image: url("/img/sprites.png");
+  background-position: calc(128px - 0*16px) calc(192px - 0*16px);
+  background-size: 128px 192px;
 }
