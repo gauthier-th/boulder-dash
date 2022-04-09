@@ -75,7 +75,6 @@ export class Level {
     }
     else
       this.#diamondCount = this.#diamondCountStart;
-    console.log(this.#diamondCountStart, this.#diamondCount);
   }
 
   levelToText() {

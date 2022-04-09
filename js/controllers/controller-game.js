@@ -34,7 +34,6 @@ export class ControllerGame extends Subject {
 
   resumeGameState(){
     const state = JSON.parse(localStorage.getItem("save-level"));
-    console.log("load state", state);
     if (state) {
       this.#game = new Game(this);
       this.#game.resumeState(state);
@@ -71,7 +70,6 @@ export class ControllerGame extends Subject {
       diamondCount: this.#game.currentLevel.diamondCount,
       moveCount: this.#game.currentLevel.moveCount,
     };
-    console.log(state);
     localStorage.setItem("save-level", JSON.stringify(state));
   }
 

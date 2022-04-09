@@ -152,3 +152,51 @@
     background-position: calc(256px - 1*32px) calc(384px - 0*32px);
   }
 }
+
+#game-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+}
+#game-popup.show {
+  display: flex;
+}
+#game-popup .container {
+  padding: 1em;
+  background: #000;
+  color: #fff;
+  border: 5px solid #fff;
+  border-radius: 10px;
+  max-width: 600px;
+}
+#game-popup .container .title {
+  font-size: 0.9em;
+  font-family: "Boulder Dash";
+  text-align: center;
+}
+
+#game-popup .container .buttons-confirm {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+#game-popup.one-button .container .buttons-confirm {
+  display: none;
+}
+#game-popup .container .one-button {
+  display: none;
+  justify-content: center;
+}
+#game-popup.one-button .container .one-button {
+  display: flex;
+}
+
+#game-popup .container button {
+  margin-top: 16px;
+  font-size: 0.8em;
+}

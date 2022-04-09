@@ -63,7 +63,7 @@ button:disabled, .custom-file-input:disabled {
 
 .custom-file-input {
   position: relative;
-  font-size: 0.8em;
+  font-size: 1em;
 }
 .custom-file-input input {
   visibility: hidden;
