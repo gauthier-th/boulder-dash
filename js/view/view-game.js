@@ -48,16 +48,21 @@ export class ViewGame extends Observer {
     }
   }
   showLevel() {
+    const currentLevel = this.#controllerGame.game.currentLevel;
     const grid = document.getElementById("level-grid");
     for (let i = 0; i < grid.children.length; i++) {
       const line = grid.children.item(i);
       for (let j = 0; j < line.children.length; j++) {
         const cell = line.children.item(j);
-        const letter = this.#controllerGame.game.currentLevel.cells[i][j].getLetter();
+        const letter = currentLevel.cells[i][j].getLetter();
         cell.classList.remove("cell-m", "cell-d", "cell-t", "cell-r", "cell-v", "cell-p", "cell-x", "cell-e");
         cell.classList.add(`cell-${letter.toLowerCase()}`);
       }
     }
+    document.getElementById("game-infos").innerHTML = `
+      <div>Diamonds: ${currentLevel.diamondCountStart - currentLevel.diamondCount}/${currentLevel.diamondCountStart}</div>
+      <div>Move count: ${currentLevel.moveCount}</div>
+    `;
   }
 
   update() {

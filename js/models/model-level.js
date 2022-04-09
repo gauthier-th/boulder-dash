@@ -16,14 +16,17 @@ export class Level {
   #controller;
   #diamondCountStart = 0;
   #diamondCount = 0;
+  #moveCount = -1;
 
-  constructor(controller) {
+  constructor(controller, moveCount) {
     this.#cells = new Array(16).fill(null).map(() => new Array(32).fill(null));
     this.#playerCell = new PlayerCell();
     this.#controller = controller;
+    if (moveCount)
+      this.#moveCount = moveCount;
   }
 
-  loadLevelFromText(cellsText) {
+  loadLevelFromText(cellsText, diamondCountStart, diamondCount) {
     let x = 0;
     let y = 0;
     for (let line of cellsText.split(/\r?\n/g)) {
@@ -36,7 +39,8 @@ export class Level {
             break;
           case "D":
             cell = new DiamondCell();
-            this.#diamondCountStart++;
+            if (!diamondCountStart)
+              this.#diamondCountStart++;
             break;
           case "T":
             cell = new EarthCell();
@@ -65,7 +69,13 @@ export class Level {
       x++;
     }
 
-    this.#diamondCount = this.#diamondCountStart;
+    if (diamondCountStart && diamondCount) {
+      this.#diamondCountStart = diamondCountStart;
+      this.#diamondCount = diamondCount;
+    }
+    else
+      this.#diamondCount = this.#diamondCountStart;
+    console.log(this.#diamondCountStart, this.#diamondCount);
   }
 
   levelToText() {
@@ -97,9 +107,12 @@ export class Level {
     let cell = this.#cells[x][y];
     const letterCell = cell.getLetter();
     if (["P"].includes(letterCell)) {
+      this.#moveCount++;
       this.#playerCell.setPosition(x, y);
       this.#cells[x][y] = this.#playerCell;
-    }else if (cell.destroyable) {
+    }
+    else if (cell.destroyable) {
+      this.#moveCount++;
       let oldX = this.#playerCell.x;
       let oldY = this.#playerCell.y;
       this.#cells[oldX][oldY] = new VoidCell();
@@ -112,16 +125,19 @@ export class Level {
         this.refreshDiamondCount();
 
       cell.onDestroy();
-    }else if (letterCell=="R" && ["LEFT", "RIGHT"].includes(direction)) {
+    }
+    else if (letterCell=="R" && ["LEFT", "RIGHT"].includes(direction)) {
+      this.#moveCount++;
       let newX, newY;
       if (direction == "LEFT") {
         newX = x+0;
         newY = y-1;
-      }else if (direction == "RIGHT") {
+      }
+      else if (direction == "RIGHT") {
         newX = x+0;
         newY = y+1;
       }
-      
+
       if (this.#cells[newX][newY].getLetter()=="V") {
         cell.setPosition(newX, newY);
         this.#cells[newX][newY] = cell;
@@ -148,7 +164,7 @@ export class Level {
 
   checkGravity() {
     if (!this.gravityNeedChecking)
-      return
+      return;
 
     this.gravityNeedChecking = false;
 
@@ -184,6 +200,10 @@ export class Level {
 
   get diamondCount() {
     return this.#diamondCount;
+  }
+
+  get moveCount() {
+    return this.#moveCount;
   }
 
   refreshDiamondCount() {

@@ -31,14 +31,14 @@ export class Game {
     this.newGame(this.#lastLevelIndex);
   }
 
-  resumeState(state){
+  resumeState(state) {
     this.#lastLevelIndex = state.levelId;
 
     if(this.#gravityInterval !== -1)
       clearInterval(this.#gravityInterval);
 
-    const level = new Level(this.#controller);
-    level.loadLevelFromText(state.levelText);
+    const level = new Level(this.#controller, state.moveCount);
+    level.loadLevelFromText(state.levelText, state.diamondCountStart, state.diamondCount);
     this.#currentLevel = level;
     this.#gravityInterval = setInterval(()=>this.#currentLevel.checkGravity(), 220);
   }

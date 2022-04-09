@@ -9,7 +9,26 @@
 
 .screen-game .title {
   font-family: "Boulder Dash";
-  font-size: 1.2em;
+  font-size: 1.3em;
+  margin: 0;
+}
+
+.screen-game #game-infos {
+  font-size: 0.8em;
+  font-family: "Boulder Dash";
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
+}
+.screen-game #game-infos > div:nth-child(2) {
+  margin-left: 100px;
+}
+
+.screen-game .buttons {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .screen-game .line {
