@@ -89,8 +89,15 @@
   background-size: 128px 192px;
 }
 
+.screen-level-settings .import-button {
+  margin: 24px 0;
+}
+.screen-level-settings .import-button button {
+  font-size: 0.8em;
+}
+
 .screen-level-settings .reset-button {
-  margin: 16px 0;
+  margin: 16px 0 0 0;
 }
 .screen-level-settings .reset-button button {
   font-size: 0.8em;
@@ -99,5 +106,5 @@
 .screen-level-settings .save-buttons {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin: 32px 0;
+  margin: 16px 0 32px 0;
 }

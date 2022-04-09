@@ -28,7 +28,7 @@ game {
   src: url("/font/boulderdash.woff") format("woff");
 }
 
-button {
+button, .custom-file-input {
   font-family: "Boulder Dash";
   font-size: 1.2em;
   padding: 0.7em 1em 0.5em 1em;
@@ -40,11 +40,11 @@ button {
   border-radius: 10px;
   outline: none;
 }
-button:hover, button.selected {
+button:hover, button.selected, .custom-file-input:hover {
   border-color: var(--color-purple-light);
   color: var(--color-purple-light);
 }
-button:disabled {
+button:disabled, .custom-file-input:disabled {
   border-color: #aaa;
   color: #aaa;
   cursor: default;
@@ -59,4 +59,19 @@ button:disabled {
   align-items: center;
   font-family: "Boulder Dash";
   font-size: 1.2em;
+}
+
+.custom-file-input {
+  position: relative;
+  font-size: 0.8em;
+}
+.custom-file-input input {
+  visibility: hidden;
+  position: absolute;
+}
+.custom-file-input span {
+}
+
+body {
+  padding: 20px;
 }

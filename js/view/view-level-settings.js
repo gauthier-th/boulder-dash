@@ -19,6 +19,15 @@ export class ViewLevelSettings extends Observer {
     document.querySelector(".reset-button button").addEventListener("click", () => {
       this.#controllerLevelSettings.reset();
     });
+
+    document.querySelector(".custom-file-input input").addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsText(file, "UTF-8");
+      reader.addEventListener("load", (evt) => {
+        this.#controllerLevelSettings.addLevel(evt.target.result);
+      });
+    });
   }
 
   showLevels() {

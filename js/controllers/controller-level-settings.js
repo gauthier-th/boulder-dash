@@ -41,6 +41,15 @@ export class ControllerLevelSettings extends Subject {
       this.notify();
     }
   }
+  addLevel(levelText) {
+    try {
+      const level = new Level(this);
+      level.loadLevelFromText(levelText);
+      this.#levels.push(level);
+      this.notify();
+    }
+    catch {}
+  }
 
   cancel() {
     this.#application.changeScreen("menu");
