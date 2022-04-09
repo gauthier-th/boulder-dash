@@ -16,6 +16,9 @@ export class ViewLevelSettings extends Observer {
     document.querySelector(".save-buttons .cancel").addEventListener("click", () => {
       this.#controllerLevelSettings.cancel();
     });
+    document.querySelector(".reset-button button").addEventListener("click", () => {
+      this.#controllerLevelSettings.reset();
+    });
   }
 
   showLevels() {
@@ -32,19 +35,23 @@ export class ViewLevelSettings extends Observer {
             ${this.formatLevel(level)}
           </div>
           <div class="buttons">
-            <button${i === 0 ? " disabled" : ""}>Monter</button$>
-            <button${i === levelCount - 1 ? " disabled" : ""}>Descendre</button$>
+            <button${i === 0 ? " disabled" : ""} class="up">Monter</button$>
+            <button class="delete">Supprimer</button>
+            <button${i === levelCount - 1 ? " disabled" : ""} class="down">Descendre</button$>
           </div>
         </div>
       `;
     }
 
     for (let i = 0; i < levelCount; i++) {
-      document.querySelector(`.level-container:nth-child(${i+1}) .buttons button:nth-child(1)`).addEventListener('click', () => {
+      document.querySelector(`.level-container:nth-child(${i+1}) .buttons button.up`).addEventListener('click', () => {
         this.#controllerLevelSettings.moveLevel(i, -1);
       });
-      document.querySelector(`.level-container:nth-child(${i+1}) .buttons button:nth-child(2)`).addEventListener('click', () => {
+      document.querySelector(`.level-container:nth-child(${i+1}) .buttons button.down`).addEventListener('click', () => {
         this.#controllerLevelSettings.moveLevel(i, 1);
+      });
+      document.querySelector(`.level-container:nth-child(${i+1}) .buttons button.delete`).addEventListener('click', () => {
+        this.#controllerLevelSettings.deleteLevel(i);
       });
     }
   }

@@ -46,9 +46,9 @@ export class Application {
     document.querySelector("game").innerHTML = templateHTML;
   }
 
-  async loadLevels() {
+  async loadLevels(forceReset = false) {
     const lastLevels = localStorage.getItem("levels");
-    if (lastLevels === null) {
+    if (forceReset || lastLevels === null) {
       const levels = await Promise.all([
         fetch("/levels/level-1.txt").then((response) => response.text()),
         fetch("/levels/level-2.txt").then((response) => response.text()),

@@ -14,6 +14,7 @@ export class ControllerLevelSettings extends Subject {
   }
 
   loadLevels() {
+    this.#levels = [];
     for (const levelText of this.#application.levels) {
       const level = new Level(this);
       level.loadLevelFromText(levelText);
@@ -34,6 +35,12 @@ export class ControllerLevelSettings extends Subject {
       this.notify();
     }
   }
+  deleteLevel(levelIndex) {
+    if (levelIndex >= 0 && levelIndex < this.#levels.length) {
+      this.#levels.splice(levelIndex, 1);
+      this.notify();
+    }
+  }
 
   cancel() {
     this.#application.changeScreen("menu");
@@ -42,6 +49,12 @@ export class ControllerLevelSettings extends Subject {
   save() {
     this.#application.setLevels(this.#levels.map(level => level.toString()));
     this.#application.changeScreen("menu");
+  }
+
+  async reset() {
+    await this.#application.loadLevels(true);
+    this.loadLevels();
+    this.notify();
   }
 
 }

@@ -89,7 +89,15 @@
   background-size: 128px 192px;
 }
 
+.screen-level-settings .reset-button {
+  margin: 16px 0;
+}
+.screen-level-settings .reset-button button {
+  font-size: 0.8em;
+}
+
 .screen-level-settings .save-buttons {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 32px 0;
 }
