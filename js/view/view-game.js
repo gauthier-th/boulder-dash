@@ -9,7 +9,7 @@ export class ViewGame extends Observer {
     super();
     this.#controllerGame = controllerGame;
     this.#controllerGame.addObserver(this);
-    this.showLevel();
+    this.initGrid();
     this.#lastMoveTimestamp = Date.now();
     // document.querySelector("button").addEventListener("click", () => {
     //   this.#controllerGame.newGame();
@@ -35,7 +35,7 @@ export class ViewGame extends Observer {
     }
   }
 
-  showLevel() {
+  initGrid() {
     const grid = document.getElementById("level-grid");
     grid.innerHTML = '';
     for (let line of this.#controllerGame.game.currentLevel.cells) {
@@ -45,6 +45,18 @@ export class ViewGame extends Observer {
       }
       ligneHTML += '</div>';
       grid.innerHTML += ligneHTML;
+    }
+  }
+  showLevel() {
+    const grid = document.getElementById("level-grid");
+    for (let i = 0; i < grid.children.length; i++) {
+      const line = grid.children.item(i);
+      for (let j = 0; j < line.children.length; j++) {
+        const cell = line.children.item(j);
+        const letter = this.#controllerGame.game.currentLevel.cells[i][j].getLetter();
+        cell.classList.remove("cell-m", "cell-d", "cell-t", "cell-r", "cell-v", "cell-p", "cell-x", "cell-e");
+        cell.classList.add(`cell-${letter.toLowerCase()}`);
+      }
     }
   }
 
