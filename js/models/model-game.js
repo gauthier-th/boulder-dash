@@ -18,8 +18,8 @@ export class Game {
 
   newGame(levelIndex) {
     this.#lastLevelIndex = levelIndex;
-    
-    if(this.#gravityInterval != -1)
+
+    if(this.#gravityInterval !== -1)
       clearInterval(this.#gravityInterval);
 
     this.#currentLevel = this.#controller.getLevel(levelIndex);
@@ -27,14 +27,14 @@ export class Game {
     this.#currentLevel.movePlayer(this.#currentLevel.startPoint.x, this.#currentLevel.startPoint.y);
   }
   
-  restartGame(){
+  restartGame() {
     this.newGame(this.#lastLevelIndex);
   }
 
   resumeState(state){
     this.#lastLevelIndex = state.levelId;
 
-    if(this.#gravityInterval != -1)
+    if(this.#gravityInterval !== -1)
       clearInterval(this.#gravityInterval);
 
     const level = new Level(this.#controller);
@@ -44,25 +44,28 @@ export class Game {
   }
 
   movePlayerRelative(dX, dY, direction) {
-    this.#currentLevel.movePlayer(this.#currentLevel.playerCell.x+dX, this.#currentLevel.playerCell.y+dY, direction);
+    if (this.#currentLevel.playerCell)
+      this.#currentLevel.movePlayer(this.#currentLevel.playerCell.x+dX, this.#currentLevel.playerCell.y+dY, direction);
   }
 
-  checkEndGame(){
-    if(this.#currentLevel.diamondCount==0){
-      if(this.#lastLevelIndex+1 == this.#controller.application.levels.length){
-        setTimeout(()=>this.#controller.goBackMenu(), 1000);
-      }else{
-        this.newGame(this.#lastLevelIndex+1);
+  checkEndGame() {
+    if(this.#currentLevel.diamondCount === 0) {
+      if (this.#lastLevelIndex+1 == this.#controller.application.levels.length) {
+        setTimeout(() => this.#controller.goBackMenu(), 1000);
+      }
+      else {
+        this.newGame(this.#lastLevelIndex + 1);
       }
     }
   }
 
-  destroy(){
-    if(this.#gravityInterval != -1)
+  destroy() {
+    if (this.#gravityInterval !== -1)
       clearInterval(this.#gravityInterval);
   }
 
   get lastLevelIndex(){
     return this.#lastLevelIndex;
   }
+
 }

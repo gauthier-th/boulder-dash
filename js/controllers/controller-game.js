@@ -23,6 +23,7 @@ export class ControllerGame extends Subject {
 
   newGame() {
     this.#game.newGame(0);
+    this.saveState();
     this.notify();
   }
 
@@ -32,10 +33,14 @@ export class ControllerGame extends Subject {
   }
 
   resumeGameState(){
-    let state = JSON.parse(localStorage.getItem("save-level"));
-    this.#game = new Game(this);
-    this.#game.resumeState(state);
-    this.notify();
+    const state = JSON.parse(localStorage.getItem("save-level"));
+    if (state) {
+      this.#game = new Game(this);
+      this.#game.resumeState(state);
+      this.notify();
+    }
+    else
+      this.newGame();
   }
 
   getLevel(levelNumber) {
@@ -44,7 +49,7 @@ export class ControllerGame extends Subject {
     return level;
   }
 
-  movePlayerRelative(dX, dY, direction){
+  movePlayerRelative(dX, dY, direction) {
     this.#game.movePlayerRelative(dX, dY, direction);
     this.notify();
     this.#game.currentLevel.gravityNeedChecking = true;
@@ -52,13 +57,13 @@ export class ControllerGame extends Subject {
     this.saveState();
   }
 
-  goBackMenu(){
+  goBackMenu() {
     this.#game.destroy();
     this.#application.changeScreen("menu");
-  }  
+  }
 
-  saveState(){
-    let state = {
+  saveState() {
+    const state = {
       levelText: this.#game.currentLevel.levelToText(),
       levelId: this.#game.lastLevelIndex
     }
