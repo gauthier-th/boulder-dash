@@ -9,9 +9,9 @@
 
 .screen-level-settings #levels {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .screen-level-settings .title {
@@ -19,9 +19,26 @@
   font-size: 1.2em;
 }
 
-.screen-level-settings .level-grid{
+.screen-level-settings .level-container {
+  margin: 32px 10px;
+  display: flex;
+}
+.screen-level-settings .level-container h3 {
+  font-family: "Boulder Dash";
+  font-size: 0.8em;
+}
+.screen-level-settings .level-container .buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.screen-level-settings .level-container .buttons button {
+  font-size: 0.8em;
+}
+
+.screen-level-settings .level-grid {
   border: white 3px solid;
-  margin: 10px;
 }
 
 .screen-level-settings .line {
@@ -70,4 +87,9 @@
   background-image: url("/img/sprites.png");
   background-position: calc(128px - 0*16px) calc(192px - 0*16px);
   background-size: 128px 192px;
+}
+
+.screen-level-settings .save-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }

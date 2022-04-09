@@ -32,7 +32,6 @@ button {
   font-family: "Boulder Dash";
   font-size: 1.2em;
   padding: 0.7em 1em 0.5em 1em;
-  border: none;
   background: #000;
   color: #fff;
   cursor: pointer;
@@ -44,6 +43,11 @@ button {
 button:hover, button.selected {
   border-color: var(--color-purple-light);
   color: var(--color-purple-light);
+}
+button:disabled {
+  border-color: #aaa;
+  color: #aaa;
+  cursor: default;
 }
 
 .loading {

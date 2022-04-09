@@ -64,6 +64,10 @@ export class Application {
   get levels() {
     return this.#levels;
   }
+  setLevels(levels) {
+    this.#levels = levels;
+    localStorage.setItem("levels", JSON.stringify(this.#levels));
+  }
 
 }
 

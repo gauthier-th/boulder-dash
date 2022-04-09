@@ -68,7 +68,7 @@ export class Level {
     this.#diamondCount = this.#diamondCountStart;
   }
 
-  levelToText(){
+  levelToText() {
     let text = "";
     for (let i = 0; i < this.#cells.length; i++) {
       const line = this.#cells[i];
@@ -89,17 +89,17 @@ export class Level {
     return this.#startPoint;
   }
 
-  get playerCell(){
+  get playerCell() {
     return this.#playerCell;
   }
 
   movePlayer(x, y, direction="") {
     let cell = this.#cells[x][y];
     const letterCell = cell.getLetter();
-    if (["P"].includes(letterCell)){
+    if (["P"].includes(letterCell)) {
       this.#playerCell.setPosition(x, y);
       this.#cells[x][y] = this.#playerCell;
-    }else if(cell.destroyable){
+    }else if (cell.destroyable) {
       let oldX = this.#playerCell.x;
       let oldY = this.#playerCell.y;
       this.#cells[oldX][oldY] = new VoidCell();
@@ -108,21 +108,21 @@ export class Level {
       this.#cells[x][y] = this.#playerCell;
       this.#playerCell.setPosition(x, y);
 
-      if(letterCell == "D")
+      if (letterCell == "D")
         this.refreshDiamondCount();
 
       cell.onDestroy();
-    }else if(letterCell=="R" && ["LEFT", "RIGHT"].includes(direction)){
+    }else if (letterCell=="R" && ["LEFT", "RIGHT"].includes(direction)) {
       let newX, newY;
-      if(direction == "LEFT"){
+      if (direction == "LEFT") {
         newX = x+0;
         newY = y-1;
-      }else if(direction == "RIGHT"){
+      }else if (direction == "RIGHT") {
         newX = x+0;
         newY = y+1;
       }
       
-      if(this.#cells[newX][newY].getLetter()=="V"){
+      if (this.#cells[newX][newY].getLetter()=="V") {
         cell.setPosition(newX, newY);
         this.#cells[newX][newY] = cell;
 
@@ -134,20 +134,20 @@ export class Level {
     }
   }
 
-  get gravityNeedChecking(){
+  get gravityNeedChecking() {
     return this.#gravityNeedChecking;
   }
 
-  set gravityNeedChecking(value){
+  set gravityNeedChecking(value) {
     this.#gravityNeedChecking = value;
   }
 
-  getLowerCell(cell){
+  getLowerCell(cell) {
     return this.#cells[cell.x+1][cell.y];
   }
 
-  checkGravity(){
-    if(!this.gravityNeedChecking)
+  checkGravity() {
+    if (!this.gravityNeedChecking)
       return
 
     this.gravityNeedChecking = false;
@@ -164,7 +164,7 @@ export class Level {
             this.#cells[x][y] = new VoidCell();
             this.#cells[x][y].setPosition(x, y);
             
-            if(this.getLowerCell(cell).getLetter()=="X"){
+            if (this.getLowerCell(cell).getLetter()=="X") {
               this.explode(cell.x, cell.y);
               this.killPlayer();
             }
@@ -178,21 +178,21 @@ export class Level {
     this.#controller.notify();
   }
 
-  get diamondCountStart(){
+  get diamondCountStart() {
     return this.#diamondCountStart;
   }
 
-  get diamondCount(){
+  get diamondCount() {
     return this.#diamondCount;
   }
 
-  refreshDiamondCount(){
+  refreshDiamondCount() {
     let count = 0;
     for (let x = this.#cells.length-1; x >= 0; x--) {
       const yS = this.#cells[x];
       for (let y = yS.length-1; y >= 0; y--) {
         let cell = this.#cells[x][y];
-        if(cell.getLetter() == "D"){
+        if (cell.getLetter() == "D") {
           count++;
         }
       }
@@ -201,17 +201,17 @@ export class Level {
     this.#diamondCount = count;
   }
 
-  explode(x, y){
+  explode(x, y ) {
     for (let dX = -1; dX <= 1; dX++) {
       for (let dY = -1; dY <= 1; dY++) {
         let cell = this.#cells[x+dX][y+dY];
-        if(cell.getLetter() != "M"){
+        if (cell.getLetter() != "M") {
           this.#cells[x+dX][y+dY] = new ExplodeCell();
           this.#cells[x+dX][y+dY].setPosition(x+dX, y+dY);
-          setTimeout(()=>{
+          setTimeout(() => {
             this.#cells[x+dX][y+dY] = new VoidCell();
             this.#cells[x+dX][y+dY].setPosition(x+dX, y+dY);
-            if(dX == 1 && dY == 1)
+            if (dX == 1 && dY == 1)
               this.#controller.notify();
               this.#gravityNeedChecking = true;
           }, 400);
@@ -220,8 +220,21 @@ export class Level {
     }
   }
 
-  killPlayer(){
+  killPlayer() {
     this.#playerCell = null;
-    setTimeout(()=>this.#controller.restartGame(), 3000);
+    setTimeout(() => this.#controller.restartGame(), 3000);
+  }
+
+  toString() {
+    let text = "";
+    for (let i = 0; i < this.#cells.length; i++) {
+      const line = this.#cells[i];
+      for (let j = 0; j < line.length; j++) {
+        const cell = this.#cells[i][j];
+        text += cell.getLetter();
+      }
+      text += "\n";
+    }
+    return text;
   }
 }
