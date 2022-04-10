@@ -20,7 +20,7 @@
 }
 
 .screen-level-settings .level-container {
-  margin: 16px 10px;
+  margin: 0px 10px;
   display: flex;
 }
 .screen-level-settings .level-container h3 {
@@ -92,6 +92,7 @@
 .screen-level-settings .import-button {
   margin: 24px 0;
 }
+
 .screen-level-settings .import-button button {
   font-size: 0.8em;
 }
@@ -99,6 +100,7 @@
 .screen-level-settings .reset-button {
   margin: 10px 0 0 0;
 }
+
 .screen-level-settings .reset-button button {
   font-size: 0.8em;
 }
@@ -107,4 +109,22 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   margin: 16px 0 32px 0;
+}
+
+.screen-level-settings .arrow-down {
+  transform: rotate(180deg);
+}
+
+button.up {
+  padding: 6px 5px 4px 5px;
+}
+
+button.down {
+  padding: 7px 5px 3px 5px;
+}
+
+button.delete {
+  padding: 7px 5px 3px 5px;
+  margin-left: 120px;
+  margin-right: 120px; 
 }

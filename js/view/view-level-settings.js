@@ -54,11 +54,12 @@ export class ViewLevelSettings extends Observer {
           <div>
             <h3>Level ${i+1 }</h3>
             ${this.formatLevel(level)}
+            <div style="height: 32px;"></div>
           </div>
           <div class="buttons">
-            <button${i === 0 ? " disabled" : ""} class="up">Monter</button$>
-            <button class="delete">Supprimer</button>
-            <button${i === levelCount - 1 ? " disabled" : ""} class="down">Descendre</button$>
+            <button${i === 0 ? " disabled" : ""} class="up"><img class="arrow" src="/img/arrow.png" /></button$>
+            <button class="delete"><img class="arrow" src="/img/trash.png" /></button>
+            <button${i === levelCount - 1 ? " disabled" : ""} class="down"><img class="arrow arrow-down" src="/img/arrow.png" /></button$>
           </div>
         </div>
       `;

@@ -16,10 +16,10 @@ export class ControllerLevelSettings extends Subject {
    */
   #levels = [];
 
-    /**
+  /**
    * constructor of the controller
    * @param {Application} application
-   */
+  */
   constructor(application) {
     super();
     this.#application = application;

@@ -40,10 +40,12 @@ button, .custom-file-input {
   border-radius: 10px;
   outline: none;
 }
+
 button:hover, button.selected, .custom-file-input:hover {
   border-color: var(--color-purple-light);
   color: var(--color-purple-light);
 }
+
 button:disabled, .custom-file-input:disabled {
   border-color: #aaa;
   color: #aaa;
@@ -65,11 +67,10 @@ button:disabled, .custom-file-input:disabled {
   position: relative;
   font-size: 1em;
 }
+
 .custom-file-input input {
   visibility: hidden;
   position: absolute;
-}
-.custom-file-input span {
 }
 
 body {
