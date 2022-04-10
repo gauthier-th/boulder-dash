@@ -24,7 +24,7 @@ export class ViewGame extends Observer {
         this.closePopup();
       }, () => {
         this.closePopup();
-        console.log("reset");
+        this.#controllerGame.restartGame();
       });
     });
     document.querySelector(".screen-game .buttons .home").addEventListener("click", () => {
@@ -32,7 +32,7 @@ export class ViewGame extends Observer {
         this.closePopup();
       }, () => {
         this.closePopup();
-        console.log("home");
+        this.#controllerGame.goBackMenu();
       });
     });
   }
@@ -91,14 +91,14 @@ export class ViewGame extends Observer {
     const title = document.querySelector("#game-popup .title");
 
     if (type === "reset") {
-      title.innerHTML = "Are you sure to reset the level?";
+      title.innerHTML = "Are you sure to reset the level";
       document.querySelector("#game-popup .buttons-confirm").innerHTML = `
         <button>Cancel</button>
         <button>Reset</button>
       `;
     }
     else if (type === "home") {
-      title.innerHTML = "Are you sure to reset quit?";
+      title.innerHTML = "Are you sure to quit";
       document.querySelector("#game-popup .buttons-confirm").innerHTML = `
         <button>Cancel</button>
         <button>Quit</button>
