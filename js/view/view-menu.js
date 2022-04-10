@@ -1,11 +1,28 @@
 import { Observer } from "../../patterns/observer.js";
 
+/**
+ * class representing a view of the menu
+ */
 export class ViewMenu extends Observer {
 
+  /**
+   * @type {Subject}
+   */
   #controllerMenu;
+
+  /**
+   * @type {number}
+   */
   #selectedButton = 0;
+
+  /**
+   * @type {string[]}
+   */
   #buttons = ["new-game", "resume-game", "level-settings"];
 
+  /**
+   * @param {Subject} controllerMenu the controller of the menu 
+   */
   constructor(controllerMenu) {
     super();
     this.#controllerMenu = controllerMenu;
@@ -30,6 +47,9 @@ export class ViewMenu extends Observer {
     this.update();
   }
 
+  /**
+   * keyboard event handler
+   */
   keyDown(e) {
     if (e.key === "s" || e.key === "ArrowDown" || e.key === "d" || e.key === "ArrowRight") {
       this.#selectedButton = Math.max(0, Math.min(this.#selectedButton + 1, 2));
@@ -44,11 +64,19 @@ export class ViewMenu extends Observer {
     }
   }
 
+  /**
+   * mouse enter event handler
+   * @param {*} button the button that was entered 
+   */
   mouseEnter(button) {
     this.#selectedButton = this.#buttons.indexOf(button);
     this.update();
   }
 
+  /**
+   * button click event handler
+   * @param {*} button the button that was clicked
+   */
   buttonClick(button) {
     if(button === "resume-game" && !this.#controllerMenu.application.isStateSaved())
       return;

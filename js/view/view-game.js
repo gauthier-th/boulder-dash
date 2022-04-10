@@ -1,20 +1,34 @@
 import { Observer } from "../../patterns/observer.js";
 
+/**
+ * class representing a view of the game
+ */
 export class ViewGame extends Observer {
 
+  /**
+   * @type {Subject}
+   */
   #controllerGame;
+
+  /**
+   * @type {number}
+   */
   #lastMoveTimestamp = 0;
+
+  /**
+   * @type {string}
+   */
   #popupType = null;
 
+  /**
+   * @param {Subject} controllerGame the controller of the game
+   */
   constructor(controllerGame) {
     super();
     this.#controllerGame = controllerGame;
     this.#controllerGame.addObserver(this);
     this.initGrid();
     this.#lastMoveTimestamp = Date.now();
-    // document.querySelector("button").addEventListener("click", () => {
-    //   this.#controllerGame.newGame();
-    // });
     
     this.keyDown = this.keyDown.bind(this);
     document.body.addEventListener('keydown', this.keyDown);
@@ -37,6 +51,9 @@ export class ViewGame extends Observer {
     });
   }
 
+  /**
+   * keyboard event handler
+   */
   keyDown(e) {
     if (this.#popupType)
       return;
@@ -55,6 +72,9 @@ export class ViewGame extends Observer {
     }
   }
 
+  /**
+   * initialize the html grid
+   */
   initGrid() {
     const grid = document.getElementById("level-grid");
     grid.innerHTML = '';
@@ -67,6 +87,10 @@ export class ViewGame extends Observer {
       grid.innerHTML += ligneHTML;
     }
   }
+
+  /**
+   * show the current level
+   */
   showLevel() {
     const currentLevel = this.#controllerGame.game.currentLevel;
     const grid = document.getElementById("level-grid");
@@ -85,6 +109,12 @@ export class ViewGame extends Observer {
     `;
   }
 
+  /**
+   * show a popup
+   * @param {string} type the type of the popup
+   * @param {*} callback1 the callback to execute when the user clicks on the first button
+   * @param {*} callback2 the callback to execute when the user clicks on the second button
+   */
   showPopup(type, callback1, callback2) {
     this.#popupType = type;
     const popup = document.querySelector("#game-popup");
@@ -127,6 +157,10 @@ export class ViewGame extends Observer {
 
     popup.classList.add("show");
   }
+
+  /**
+   * close the current popup
+   */
   closePopup() {
     this.#popupType = null;
     const popup = document.querySelector("#game-popup");

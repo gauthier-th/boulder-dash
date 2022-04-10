@@ -1,9 +1,18 @@
 import { Observer } from "../../patterns/observer.js";
 
+/**
+ * class representing a view of the levels settings
+ */
 export class ViewLevelSettings extends Observer {
 
+  /**
+   * @type {Subject}
+   */
   #controllerLevelSettings;
 
+  /**
+   * @param {Subject} controllerLevelSettings the controller of the levels settings 
+   */
   constructor(controllerLevelSettings) {
     super();
     this.#controllerLevelSettings = controllerLevelSettings;
@@ -30,6 +39,9 @@ export class ViewLevelSettings extends Observer {
     });
   }
 
+  /**
+   * Show the levels in the level-list
+   */
   showLevels() {
     const grid = document.getElementById("levels");
     grid.innerHTML = "";
@@ -65,6 +77,11 @@ export class ViewLevelSettings extends Observer {
     }
   }
 
+  /**
+   * format the level to a string
+   * @param {Level} level the level to format
+   * @returns {string} the formatted level
+   */
   formatLevel(level) {
     let html = '<div class="level-grid">';
     for (let line of level.cells) {
