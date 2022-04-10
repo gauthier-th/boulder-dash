@@ -73,6 +73,15 @@ export class Application {
     localStorage.setItem("levels", JSON.stringify(this.#levels));
   }
 
+  resetState() {
+    localStorage.setItem("state-saved", 0);
+    localStorage.setItem("save-level", {});
+  }
+
+  isStateSaved() {
+    return Boolean(parseInt(localStorage.getItem("state-saved") || '0'));
+  }
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -23,6 +23,10 @@ export class ViewMenu extends Observer {
 
     this.keyDown = this.keyDown.bind(this);
     document.body.addEventListener('keydown', this.keyDown);
+    
+    if(!this.#controllerMenu.application.isStateSaved())
+      document.querySelector("button.resume-game").classList.add("disabled");
+
     this.update();
   }
 
@@ -46,6 +50,8 @@ export class ViewMenu extends Observer {
   }
 
   buttonClick(button) {
+    if(button === "resume-game" && !this.#controllerMenu.application.isStateSaved())
+      return;
     document.body.removeEventListener('keydown', this.keyDown);
     this.#controllerMenu.buttonClick(button);
   }

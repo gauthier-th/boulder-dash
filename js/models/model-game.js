@@ -53,6 +53,7 @@ export class Game {
       if (this.#lastLevelIndex+1 == this.#controller.application.levels.length) {
         this.view.showPopup("win", () => {
           this.view.closePopup();
+          this.#controller.application.resetState();
           this.#controller.goBackMenu();
         }, () => {});
       }

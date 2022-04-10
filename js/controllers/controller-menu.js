@@ -26,4 +26,8 @@ export class ControllerMenu extends Subject {
     this.#application.changeScreen("level-settings");
   }
 
+  get application() {
+    return this.#application;
+  }
+
 }

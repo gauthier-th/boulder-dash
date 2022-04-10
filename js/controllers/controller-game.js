@@ -71,6 +71,7 @@ export class ControllerGame extends Subject {
       moveCount: this.#game.currentLevel.moveCount,
     };
     localStorage.setItem("save-level", JSON.stringify(state));
+    localStorage.setItem("state-saved", 1);
   }
 
   get application(){

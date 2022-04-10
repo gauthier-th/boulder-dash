@@ -57,6 +57,7 @@ export class ControllerLevelSettings extends Subject {
 
   save() {
     this.#application.setLevels(this.#levels.map(level => level.toString()));
+    this.#application.resetState();
     this.#application.changeScreen("menu");
   }
 
