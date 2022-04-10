@@ -1,14 +1,28 @@
 import { Subject } from "../../patterns/subject.js";
 
+/**
+ * Class representing controller of the menu
+ */
 export class ControllerMenu extends Subject {
 
+  /**
+   * @type {Application}
+   */
   #application;
 
+  /**
+   * constructor of the controller
+   * @param {Application} application
+  */
   constructor(application) {
     super();
     this.#application = application;
   }
 
+  /**
+   * on button click
+   * @param {string} button button clicked
+   */
   buttonClick(button) {
     if (button === "new-game")
       this.#application.changeScreen("game");
