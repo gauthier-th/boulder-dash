@@ -39,6 +39,10 @@ export class Application {
     }
   }
 
+  get view(){
+    return this.#view;
+  }
+
   async loadTemplate(screen) {
     document.querySelector("game").innerHTML = `<div class="loading">Loading...</div>`;
     const template = await fetch(`/templates/${screen}.html`);

@@ -105,9 +105,8 @@ export class ViewGame extends Observer {
       `;
     }
     else if (type === "win") {
-      title.innerHTML = "Congratulation! You win!";
+      title.innerHTML = "Congratulation!<br>You win!";
       document.querySelector("#game-popup .one-button").innerHTML = `
-        <button>Cancel</button>
         <button>Quit</button>
       `;
       popup.classList.add("one-button");

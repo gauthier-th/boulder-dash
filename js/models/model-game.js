@@ -51,7 +51,10 @@ export class Game {
   checkEndGame() {
     if(this.#currentLevel.diamondCount === 0) {
       if (this.#lastLevelIndex+1 == this.#controller.application.levels.length) {
-        setTimeout(() => this.#controller.goBackMenu(), 1000);
+        this.view.showPopup("win", () => {
+          this.view.closePopup();
+          this.#controller.goBackMenu();
+        }, () => {});
       }
       else {
         this.newGame(this.#lastLevelIndex + 1);
@@ -66,6 +69,10 @@ export class Game {
 
   get lastLevelIndex(){
     return this.#lastLevelIndex;
+  }
+
+  get view(){
+    return this.#controller.application.view;
   }
 
 }
