@@ -42,26 +42,26 @@
 }
 
 .screen-game .cell.cell-m { /* wall */
-  background-image: url("img/sprites.png");
+  background-image: url("../img/sprites.png");
   background-position: calc(256px - 1*32px) calc(384px - 6*32px);
   background-color: grey;
 }
 
 .screen-game .cell.cell-d { /* diamond */
-  background-image: url("img/sprites.png");
+  background-image: url("../img/sprites.png");
   background-position: calc(256px - 0*32px) calc(384px - 10*32px);
   background-color: cyan;
   animation: diamondIdle 1.2s infinite step-end;
 }
 
 .screen-game .cell.cell-t { /* earth */
-  background-image: url("img/sprites.png");
+  background-image: url("../img/sprites.png");
   background-position: calc(256px - 1*32px) calc(384px - 7*32px);
   background-color: saddlebrown;
 }
 
 .screen-game .cell.cell-r { /* rock */
-  background-image: url("img/sprites.png");
+  background-image: url("../img/sprites.png");
   background-position: calc(256px - 0*32px) calc(384px - 7*32px);
   background-color: darkgray;
 }
@@ -75,14 +75,14 @@
 }
 
 .screen-game .cell.cell-x {
-  background-image: url("img/sprites.png");
+  background-image: url("../img/sprites.png");
   /* background-position: calc(256px - 0*32px) calc(384px - 0*32px); */
   background-color: yellow;
   animation: playerIdle 1.2s infinite step-end;
 }
 
 .screen-game .cell.cell-e {
-  background-image: url("img/sprites.png");
+  background-image: url("../img/sprites.png");
   background-color: red;
   animation: explodeAnimation 0.5s infinite step-end;
 }
