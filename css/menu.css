@@ -19,3 +19,7 @@
   border-color: #444;
   cursor: default;
 }
+
+.screen-menu .button-spacer {
+  margin-top: 40px;
+}

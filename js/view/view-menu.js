@@ -18,7 +18,7 @@ export class ViewMenu extends Observer {
   /**
    * @type {string[]}
    */
-  #buttons = ["new-game", "resume-game", "level-settings"];
+  #buttons = ["new-game", "resume-game", "level-settings", "github"];
 
   /**
    * @param {Subject} controllerMenu the controller of the menu 
@@ -52,11 +52,11 @@ export class ViewMenu extends Observer {
    */
   keyDown(e) {
     if (e.key === "s" || e.key === "ArrowDown" || e.key === "d" || e.key === "ArrowRight") {
-      this.#selectedButton = Math.max(0, Math.min(this.#selectedButton + 1, 2));
+      this.#selectedButton = Math.max(0, Math.min(this.#selectedButton + 1, 3));
       this.update();
     }
     else if (e.key === "z" || e.key === "ArrowUp" || e.key === "q" || e.key === "ArrowLeft") {
-      this.#selectedButton = Math.max(0, Math.min(this.#selectedButton - 1, 2));
+      this.#selectedButton = Math.max(0, Math.min(this.#selectedButton - 1, 3));
       this.update();
     }
     else if (e.key === "Enter") {
@@ -88,6 +88,7 @@ export class ViewMenu extends Observer {
     document.querySelector("button.new-game").classList.remove("selected");
     document.querySelector("button.resume-game").classList.remove("selected");
     document.querySelector("button.level-settings").classList.remove("selected");
+    document.querySelector("button.github").classList.remove("selected");
     document.querySelector(`button.${this.#buttons[this.#selectedButton]}`).classList.add("selected");
   }
 

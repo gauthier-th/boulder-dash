@@ -30,6 +30,10 @@ export class ControllerMenu extends Subject {
       this.#application.changeScreen("game", {action: "resume"});
     else if (button === "level-settings")
       this.#application.changeScreen("level-settings");
+    else if (button === "github"){
+      window.open("https://github.com/gauthier-th/boulder-dash");
+      this.#application.changeScreen("menu");
+    }
   }
 
   resumeGame() {
