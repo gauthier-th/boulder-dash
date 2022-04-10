@@ -78,6 +78,7 @@ export class Level {
       for (let index = 0; index < line.length; index++) {
         let char = line[index];
         let cell = null;
+        cell = new VoidCell();
         switch (char) {
           case "M":
             cell = new WallCell();
