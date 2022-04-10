@@ -7,17 +7,56 @@ import { StartPointCell } from "./cells/model-cell-startpoint.js";
 import { PlayerCell } from "./cells/model-cell-player.js";
 import { ExplodeCell } from "./cells/model-cell-explode.js";
 
+/**
+ * Class representing a level.
+ */
 export class Level {
 
+  /**
+   * @type {Array[16][32]}
+   */
   #cells; // cells[16][32]
+
+  /**
+   * @type {Cell}
+   */
   #startPoint;
+
+  /**
+   * @type {playerCell}
+   */
   #playerCell;
+
+  /**
+   * @type {boolean}
+   */
   #gravityNeedChecking = true;
+
+  /**
+   * @type {Subject}
+   */
   #controller;
+
+  /**
+   * @type {number}
+   */
   #diamondCountStart = 0;
+
+  /**
+   * @type {number}
+   */
   #diamondCount = 0;
+
+  /**
+   * @type {number}
+   */
   #moveCount = -1;
 
+  /**
+   * constructor of the level
+   * @param {Subject} controller the controller of the game
+   * @param {number} moveCount the number of moves 
+   */
   constructor(controller, moveCount) {
     this.#cells = new Array(16).fill(null).map(() => new Array(32).fill(null));
     this.#playerCell = new PlayerCell();
@@ -26,6 +65,12 @@ export class Level {
       this.#moveCount = moveCount;
   }
 
+  /**
+   * load the level from a text
+   * @param {string} cellsText the text of the level
+   * @param {number} diamondCountStart the number of diamonds at the start
+   * @param {number} diamondCount the number of diamonds getted
+   */
   loadLevelFromText(cellsText, diamondCountStart, diamondCount) {
     let x = 0;
     let y = 0;
@@ -77,6 +122,10 @@ export class Level {
       this.#diamondCount = this.#diamondCountStart;
   }
 
+  /**
+   * generate the text representation of the level
+   * @returns {string} the text of the level
+   */
   levelToText() {
     let text = "";
     for (let i = 0; i < this.#cells.length; i++) {
@@ -102,6 +151,12 @@ export class Level {
     return this.#playerCell;
   }
 
+  /**
+   * move the player to the given position
+   * @param {number} x
+   * @param {number} y
+   * @param {string} direction the direction of the movement 
+   */
   movePlayer(x, y, direction="") {
     let cell = this.#cells[x][y];
     const letterCell = cell.getLetter();
@@ -157,10 +212,18 @@ export class Level {
     this.#gravityNeedChecking = value;
   }
 
+  /**
+   * return the cell below the given cell
+   * @param {Cell} cell cell to get the cell below
+   * @returns {Cell} the cell below the given cell
+   */
   getLowerCell(cell) {
     return this.#cells[cell.x+1][cell.y];
   }
 
+  /**
+   * function to check if there are rocks to fall
+   */
   checkGravity() {
     if (!this.gravityNeedChecking)
       return;
@@ -205,6 +268,9 @@ export class Level {
     return this.#moveCount;
   }
 
+  /**
+   * refresh the diamond count remaining on the level
+   */
   refreshDiamondCount() {
     let count = 0;
     for (let x = this.#cells.length-1; x >= 0; x--) {
@@ -220,7 +286,12 @@ export class Level {
     this.#diamondCount = count;
   }
 
-  explode(x, y ) {
+  /**
+   * make a explosion at the given position
+   * @param {number} x 
+   * @param {number} y 
+   */
+  explode(x, y) {
     for (let dX = -1; dX <= 1; dX++) {
       for (let dY = -1; dY <= 1; dY++) {
         let cell = this.#cells[x+dX][y+dY];
@@ -239,11 +310,18 @@ export class Level {
     }
   }
 
+  /**
+   * kill the player and restart the game after 3 seconds
+   */
   killPlayer() {
     this.#playerCell = null;
     setTimeout(() => this.#controller.restartGame(), 3000);
   }
 
+  /**
+   * generate the text representation of the level
+   * @returns {string} the text of the level
+   */
   toString() {
     let text = "";
     for (let i = 0; i < this.#cells.length; i++) {
