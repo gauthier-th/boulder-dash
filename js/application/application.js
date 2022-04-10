@@ -5,13 +5,34 @@ import { ViewGame } from "../view/view-game.js";
 import { ControllerLevelSettings } from "../controllers/controller-level-settings.js";
 import { ViewLevelSettings } from "../view/view-level-settings.js";
 
+/**
+ * Class representing the application
+ */
 export class Application {
 
+  /**
+   * @type {string}
+   */
   #screen;
+
+  /**
+   * @type {Subject}
+   */
   #controller;
+
+  /**
+   * @type {Observer}
+   */
   #view;
+
+  /**
+   * @type {Level[]}
+   */
   #levels = [];
 
+  /**
+   * constructor of the application
+   */
   constructor() {
     (async () => {
       await this.loadLevels();
@@ -19,6 +40,11 @@ export class Application {
     })();
   }
 
+  /**
+   * change the screen
+   * @param {string} screen
+   * @param {array} settings 
+   */
   async changeScreen(screen, settings = {}) {
     if(this.#view != undefined)
       this.#view.destroy();
@@ -43,6 +69,10 @@ export class Application {
     return this.#view;
   }
 
+  /**
+   * load the template
+   * @param {string} screen screen template to load 
+   */
   async loadTemplate(screen) {
     document.querySelector("game").innerHTML = `<div class="loading">Loading...</div>`;
     const template = await fetch(`/templates/${screen}.html`);
@@ -50,6 +80,10 @@ export class Application {
     document.querySelector("game").innerHTML = templateHTML;
   }
 
+  /**
+   * load levels from local storage and if not found, load default levels
+   * @param {boolean} forceReset  if true, reset the levels saved in the local storage 
+   */
   async loadLevels(forceReset = false) {
     const lastLevels = localStorage.getItem("levels");
     if (forceReset || lastLevels === null) {
@@ -68,16 +102,28 @@ export class Application {
   get levels() {
     return this.#levels;
   }
+
+  /**
+   * saves levels in the local storage
+   * @param {Level[]} levels levels to save
+   */
   setLevels(levels) {
     this.#levels = levels;
     localStorage.setItem("levels", JSON.stringify(this.#levels));
   }
 
+  /**
+   * reset the state saved
+   */
   resetState() {
     localStorage.setItem("state-saved", 0);
     localStorage.setItem("save-level", {});
   }
 
+  /**
+   * return if there is a state saved
+   * @returns {boolean} true if the game is saved
+   */
   isStateSaved() {
     return Boolean(parseInt(localStorage.getItem("state-saved") || '0'));
   }
