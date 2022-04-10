@@ -57,9 +57,9 @@ export class ViewLevelSettings extends Observer {
             <div style="height: 32px;"></div>
           </div>
           <div class="buttons">
-            <button${i === 0 ? " disabled" : ""} class="up"><img class="arrow" src="/img/arrow.png" /></button$>
-            <button class="delete"><img class="arrow" src="/img/trash.png" /></button>
-            <button${i === levelCount - 1 ? " disabled" : ""} class="down"><img class="arrow arrow-down" src="/img/arrow.png" /></button$>
+            <button${i === 0 ? " disabled" : ""} class="up"><img class="arrow" src="img/arrow.png" /></button$>
+            <button class="delete"><img class="arrow" src="img/trash.png" /></button>
+            <button${i === levelCount - 1 ? " disabled" : ""} class="down"><img class="arrow arrow-down" src="img/arrow.png" /></button$>
           </div>
         </div>
       `;
