@@ -25,7 +25,7 @@ game {
 
 @font-face {
   font-family: "Boulder Dash";
-  src: url("/font/boulderdash.woff") format("woff");
+  src: url("../font/boulderdash.woff") format("woff");
 }
 
 button, .custom-file-input {

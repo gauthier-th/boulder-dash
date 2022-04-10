@@ -75,7 +75,7 @@ export class Application {
    */
   async loadTemplate(screen) {
     document.querySelector("game").innerHTML = `<div class="loading">Loading...</div>`;
-    const template = await fetch(`/templates/${screen}.html`);
+    const template = await fetch(`templates/${screen}.html`);
     const templateHTML = await template.text();
     document.querySelector("game").innerHTML = templateHTML;
   }
@@ -88,9 +88,9 @@ export class Application {
     const lastLevels = localStorage.getItem("levels");
     if (forceReset || lastLevels === null) {
       const levels = await Promise.all([
-        fetch("/levels/level-1.txt").then((response) => response.text()),
-        fetch("/levels/level-2.txt").then((response) => response.text()),
-        fetch("/levels/level-3.txt").then((response) => response.text()),
+        fetch("levels/level-1.txt").then((response) => response.text()),
+        fetch("levels/level-2.txt").then((response) => response.text()),
+        fetch("levels/level-3.txt").then((response) => response.text()),
       ])
       localStorage.setItem("levels", JSON.stringify(levels));
       this.#levels = levels;
